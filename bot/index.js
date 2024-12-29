@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 require('dotenv').config();
 
-const { Bot, GrammyError, HttpError } = require('grammy');
-const { I18n } = require('@grammyjs/i18n');
+const { Bot, GrammyError, HttpError, session } = require('grammy');
+const { hydrateReply } = require('@grammyjs/parse-mode');
+// const { I18n } = require('@grammyjs/i18n');
 const { run } = require('@grammyjs/runner');
 const axios = require('axios');
-const { description } = require('./resources/info');
+const { summaryReply } = require('./reply/summary');
+const { addExpense, makeTranscation } = require('./reply/expense');
 
 const { BOT_TOKEN } = process.env;
 const { BOT_SERVER } = process.env;
@@ -15,6 +17,8 @@ const { BOT_SERVER } = process.env;
 //   directory: './bot/locales',
 // });
 const bot = new Bot(BOT_TOKEN);
+bot.use(hydrateReply);
+bot.use(session({ initial: () => ({ step: 'idle' }) }));
 
 // bot.use(i18n);
 
@@ -37,22 +41,30 @@ bot.command('start', async (ctx) => {
         username: ctx.from.username,
       });
       const newUser = response.data;
-      /**
-       * Initialize Default Categories
-       */
-      ctx.reply(newUser);
+      const { message, option } = await summaryReply(
+        newUser.username,
+        newUser._id,
+      );
+      await ctx.replyFmt(message, option);
     } else {
-      ctx.reply(data);
+      const { message, option } = await summaryReply(data.username, data._id);
+      // console.log(message);
+      ctx.replyFmt(message, option);
     }
   }
 });
 
-// Reply to any message with "Hi there!".
-bot.on('message', async (ctx) => {
-  ctx.reply('Hi there 2!');
-  const response = await axios.get(`${BOT_SERVER}/v1/currencies`);
-  console.log(response.data);
-});
+// Expense Functionality
+bot.callbackQuery('add_expense', addExpense);
+// bot.on('callback_query:data', makeTranscation);
+// bot.on('message:text', (ctx) => {});
+
+// // Reply to any message with "Hi there!".
+// bot.on('message', async (ctx) => {
+//   ctx.reply('Hi there 2!');
+//   const response = await axios.get(`${BOT_SERVER}/v1/currencies`);
+//   console.log(response.data);
+// });
 
 bot.catch((err) => {
   const { ctx } = err;

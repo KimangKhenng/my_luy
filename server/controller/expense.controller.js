@@ -3,12 +3,12 @@ const asyncHandler = require('express-async-handler');
 const ExpenseModel = require('../model/expense.model');
 
 const createExpense = asyncHandler(async (req, res) => {
-  const { userId, categoryId, walletId, amount, description } = req.body;
+  const { userId, categoryId, currencyId, amount, description } = req.body;
 
   const transcation = new ExpenseModel({
     userId,
     categoryId,
-    walletId,
+    currencyId,
     amount,
     description,
   });

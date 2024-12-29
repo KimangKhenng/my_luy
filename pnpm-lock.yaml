@@ -11,6 +11,12 @@ importers:
       '@grammyjs/i18n':
         specifier: ^1.1.2
         version: 1.1.2(grammy@1.33.0)
+      '@grammyjs/parse-mode':
+        specifier: ^1.10.0
+        version: 1.10.0(grammy@1.33.0)
+      '@grammyjs/router':
+        specifier: ^2.0.0
+        version: 2.0.0(grammy@1.33.0)
       '@grammyjs/runner':
         specifier: ^2.0.3
         version: 2.0.3(grammy@1.33.0)
@@ -35,6 +41,9 @@ importers:
       grammy:
         specifier: ^1.33.0
         version: 1.33.0
+      moment:
+        specifier: ^2.30.1
+        version: 2.30.1
       mongoose:
         specifier: ^8.9.1
         version: 8.9.1
@@ -119,6 +128,18 @@ packages:
     engines: {node: '>=12'}
     peerDependencies:
       grammy: ^1.10.0
+
+  '@grammyjs/parse-mode@1.10.0':
+    resolution: {integrity: sha512-ZjbY2Ax0b4Nf8lPz3NV0cWDxUC10kOkzgxws+iTdgG+hAiPQVUnP/oJnAKrW1ZQOWULZYQ4GOR/+aCZHyUuLQA==}
+    engines: {node: '>=14.13.1'}
+    peerDependencies:
+      grammy: ^1.20.1
+
+  '@grammyjs/router@2.0.0':
+    resolution: {integrity: sha512-xJ3HRNj3mVojLtkFmV+GvKpOWOnS0CGdAIdvpaq+j+8dic1wM1OhOukaotkKzAWZ6bb9QyzUUgVFN6xfZDO5VA==}
+    engines: {node: ^12.20.0 || >=14.13.1}
+    peerDependencies:
+      grammy: ^1.0.0
 
   '@grammyjs/runner@2.0.3':
     resolution: {integrity: sha512-nckmTs1dPWfVQteK9cxqxzE+0m1VRvluLWB8UgFzsjg62w3qthPJt0TYtJBEdG7OedvfQq4vnFAyE6iaMkR42A==}
@@ -1052,6 +1073,9 @@ packages:
   minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
+  moment@2.30.1:
+    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
+
   mongodb-connection-string-url@3.0.1:
     resolution: {integrity: sha512-XqMGwRX0Lgn05TDB4PyG2h2kKO/FfWJyCzYQbIhXUxz7ETt0I/FqHjUeqj37irJ+Dl1ZtU82uYyj14u2XsZKfg==}
 
@@ -1628,6 +1652,14 @@ snapshots:
       '@deno/shim-deno': 0.18.2
       '@fluent/bundle': 0.17.1
       '@fluent/langneg': 0.6.2
+      grammy: 1.33.0
+
+  '@grammyjs/parse-mode@1.10.0(grammy@1.33.0)':
+    dependencies:
+      grammy: 1.33.0
+
+  '@grammyjs/router@2.0.0(grammy@1.33.0)':
+    dependencies:
       grammy: 1.33.0
 
   '@grammyjs/runner@2.0.3(grammy@1.33.0)':
@@ -2682,6 +2714,8 @@ snapshots:
       brace-expansion: 1.1.11
 
   minimist@1.2.8: {}
+
+  moment@2.30.1: {}
 
   mongodb-connection-string-url@3.0.1:
     dependencies:

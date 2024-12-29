@@ -13,11 +13,16 @@ const ExpenseSchema = new mongoose.Schema(
       ref: 'Category',
       required: true,
     },
-    walletId: {
+    currencyId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Wallet',
+      ref: 'Currency',
       required: true,
     },
+    // walletId: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'Wallet',
+    //   required: true,
+    // },
     amount: { type: Number, required: true },
     description: { type: String, required: false },
   },

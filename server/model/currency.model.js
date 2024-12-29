@@ -3,8 +3,9 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 
 const CurrencySchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    symbol: { type: String },
+    name: { type: String, required: true, unique: true },
+    symbol: { type: String, required: true },
+    sign: { type: String, required: true }
   },
   { timestamps: true },
 );

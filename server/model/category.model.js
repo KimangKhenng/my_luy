@@ -10,6 +10,10 @@ const CategorySchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    sign: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true },
 );
