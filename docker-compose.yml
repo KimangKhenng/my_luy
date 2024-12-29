@@ -1,0 +1,44 @@
+services:
+  my-luy-load-balancer:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    container_name: my-luy-load-balancer
+    depends_on:
+      - myluy
+    environment:
+      - NGINX_SERVER_NAME=localhost
+      - EXPRESS_HOST_1=${EXPRESS_CONTAINER}-1
+      # - EXPRESS_HOST_2=${EXPRESS_CONTAINER}-2
+      # - EXPRESS_HOST_3=${EXPRESS_CONTAINER}-3
+      - EXPRESS_PORT=3000
+      - NGINX_MAX_BODY=100M
+    ports:
+      - 4000:${NGIN_PORT}
+  myluy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/app/server
+      - .env:/app/.env
+    scale: 1
+    depends_on:
+      - myluy-db
+  myluy-db:
+    image: mongo:latest
+    ports:
+      - '27018:27017'
+    container_name: myluy-db
+    volumes:
+      - myluybdata:/data/db
+  myluy-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile-bot-dev
+    container_name: myluy-bot
+    volumes:
+      - ./bot:/app/bot
+      - .env:/app/.env
+volumes:
+  myluybdata:
