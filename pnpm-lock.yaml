@@ -8,9 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@grammyjs/conversations':
+        specifier: ^1.2.0
+        version: 1.2.0(grammy@1.33.0)
       '@grammyjs/i18n':
         specifier: ^1.1.2
         version: 1.1.2(grammy@1.33.0)
+      '@grammyjs/menu':
+        specifier: ^1.3.0
+        version: 1.3.0(grammy@1.33.0)
       '@grammyjs/parse-mode':
         specifier: ^1.10.0
         version: 1.10.0(grammy@1.33.0)
@@ -50,6 +56,9 @@ importers:
       mongoose-paginate-v2:
         specifier: ^1.8.5
         version: 1.8.5
+      qs:
+        specifier: ^6.13.1
+        version: 6.13.1
       swagger-generator-express:
         specifier: ^2.1.1
         version: 2.1.1
@@ -95,8 +104,14 @@ packages:
     resolution: {integrity: sha512-llL88JShoCsth8fF8R4SJnIn+WLvR6ccFxu1H3FlMhDontdcmZWf2HgIZ7AIqV3Xcck1idlohrN4EUBQz6klbw==}
     engines: {node: '>=6.9.0'}
 
+  '@deno/shim-deno-test@0.4.0':
+    resolution: {integrity: sha512-oYWcD7CpERZy/TXMTM9Tgh1HD/POHlbY9WpzmAk+5H8DohcxG415Qws8yLGlim3EaKBT2v3lJv01x4G0BosnaQ==}
+
   '@deno/shim-deno-test@0.5.0':
     resolution: {integrity: sha512-4nMhecpGlPi0cSzT67L+Tm+GOJqvuk8gqHBziqcUQOarnuIax1z96/gJHCSIz2Z0zhxE6Rzwb3IZXPtFh51j+w==}
+
+  '@deno/shim-deno@0.16.1':
+    resolution: {integrity: sha512-s9v0kzF5bm/o9TgdwvsraHx6QNllYrXXmKzgOG2lh4LFXnVMr2gpjK/c/ve6EflQn1MqImcWmVD8HAv5ahuuZQ==}
 
   '@deno/shim-deno@0.18.2':
     resolution: {integrity: sha512-oQ0CVmOio63wlhwQF75zA4ioolPvOwAoK0yuzcS5bDC1JUvH3y1GS8xPh8EOpcoDQRU4FTG8OQfxhpR+c6DrzA==}
@@ -123,11 +138,23 @@ packages:
     resolution: {integrity: sha512-YF4gZ4sLYRQfctpUR2uhb5UyPUYY5n/bi3OaED/Q4awKjPjlaF8tInO3uja7pnLQcmLTURkZL7L9zxv2Z5NDwg==}
     engines: {node: '>=12.0.0', npm: '>=7.0.0'}
 
+  '@grammyjs/conversations@1.2.0':
+    resolution: {integrity: sha512-d06nGFPlcea4UqjOcxCm5rwiV74bZQVUWQl3YVQp5TwC0oCHNK+PXgqaKkVgkfcYSMyx3dADRBuBkcGt+yiyDA==}
+    engines: {node: ^12.20.0 || >=14.13.1}
+    peerDependencies:
+      grammy: ^1.20.1
+
   '@grammyjs/i18n@1.1.2':
     resolution: {integrity: sha512-PcK06mxuDDZjxdZ5HywBhr+erEITsR816KP4DNIDDds1jpA45pfz/nS9FdZmzF8H6lMyPix3mV5WL1rT4q+BuA==}
     engines: {node: '>=12'}
     peerDependencies:
       grammy: ^1.10.0
+
+  '@grammyjs/menu@1.3.0':
+    resolution: {integrity: sha512-4T/xtNMJ25XD1BNWoQL4IProuvX5p1UGI6RS9vR7xaWn59/QxspqTGtT1orFRbCUjlOqkLJmpRSoQNxeO0Pdww==}
+    engines: {node: '>=12.20.0 || >=14.13.1'}
+    peerDependencies:
+      grammy: ^1.31.0
 
   '@grammyjs/parse-mode@1.10.0':
     resolution: {integrity: sha512-ZjbY2Ax0b4Nf8lPz3NV0cWDxUC10kOkzgxws+iTdgG+hAiPQVUnP/oJnAKrW1ZQOWULZYQ4GOR/+aCZHyUuLQA==}
@@ -1156,6 +1183,9 @@ packages:
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
+  o-son@1.0.4:
+    resolution: {integrity: sha512-tdGKxZgiTexSv97/igC2m8Y6FljgwvwHW/Zy3ql3Jx6MPKrPKaBDLhV7rz8uuLjcDPw6Pxa2PVsnWwen59MmnQ==}
+
   object-inspect@1.13.3:
     resolution: {integrity: sha512-kDCGIbxkDSXE3euJZZXzc6to7fCrKHNI/hSRQnRuQ+BWjFNzZwiFF8fj/6o2t2G9/jTj8PSIYTfCLelLZEeRpA==}
     engines: {node: '>= 0.4'}
@@ -1261,6 +1291,10 @@ packages:
 
   qs@6.13.0:
     resolution: {integrity: sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==}
+    engines: {node: '>=0.6'}
+
+  qs@6.13.1:
+    resolution: {integrity: sha512-EJPeIn0CYrGu+hli1xilKAPXODtJ12T0sP63Ijx2/khC2JtuaN3JyNIpvmnkmaEtha9ocbG4A4cMcr+TvqvwQg==}
     engines: {node: '>=0.6'}
 
   range-parser@1.2.1:
@@ -1615,7 +1649,14 @@ snapshots:
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
+  '@deno/shim-deno-test@0.4.0': {}
+
   '@deno/shim-deno-test@0.5.0': {}
+
+  '@deno/shim-deno@0.16.1':
+    dependencies:
+      '@deno/shim-deno-test': 0.4.0
+      which: 2.0.2
 
   '@deno/shim-deno@0.18.2':
     dependencies:
@@ -1647,11 +1688,23 @@ snapshots:
 
   '@fluent/langneg@0.6.2': {}
 
+  '@grammyjs/conversations@1.2.0(grammy@1.33.0)':
+    dependencies:
+      debug: 4.4.0(supports-color@5.5.0)
+      grammy: 1.33.0
+      o-son: 1.0.4
+    transitivePeerDependencies:
+      - supports-color
+
   '@grammyjs/i18n@1.1.2(grammy@1.33.0)':
     dependencies:
       '@deno/shim-deno': 0.18.2
       '@fluent/bundle': 0.17.1
       '@fluent/langneg': 0.6.2
+      grammy: 1.33.0
+
+  '@grammyjs/menu@1.3.0(grammy@1.33.0)':
+    dependencies:
       grammy: 1.33.0
 
   '@grammyjs/parse-mode@1.10.0(grammy@1.33.0)':
@@ -2788,6 +2841,10 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
+  o-son@1.0.4:
+    dependencies:
+      '@deno/shim-deno': 0.16.1
+
   object-inspect@1.13.3: {}
 
   object-keys@1.1.1: {}
@@ -2887,6 +2944,10 @@ snapshots:
   punycode@2.3.1: {}
 
   qs@6.13.0:
+    dependencies:
+      side-channel: 1.1.0
+
+  qs@6.13.1:
     dependencies:
       side-channel: 1.1.0
 

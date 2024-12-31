@@ -2,23 +2,35 @@
 require('dotenv').config();
 
 const { Bot, GrammyError, HttpError, session } = require('grammy');
+const {
+  conversations,
+  createConversation,
+} = require('@grammyjs/conversations');
 const { hydrateReply } = require('@grammyjs/parse-mode');
-// const { I18n } = require('@grammyjs/i18n');
+const { I18n } = require('@grammyjs/i18n');
 const { run } = require('@grammyjs/runner');
 const axios = require('axios');
-const { summaryReply } = require('./reply/summary');
-const { addExpense, makeTranscation } = require('./reply/expense');
+const { summaryReply } = require('./conversation/summary');
+const { expense } = require('./conversation/expense');
+const transcation = require('./conversation/transcation');
 
 const { BOT_TOKEN } = process.env;
 const { BOT_SERVER } = process.env;
 
 // const i18n = new I18n({
 //   defaultLocale: 'en',
+//   useSession: true,
 //   directory: './bot/locales',
+//   fluentBundleOptions: { useIsolating: false },
 // });
 const bot = new Bot(BOT_TOKEN);
 bot.use(hydrateReply);
-bot.use(session({ initial: () => ({ step: 'idle' }) }));
+bot.use(session({ initial: () => ({}) }));
+// bot.use(i18n);
+bot.use(conversations());
+bot.use(createConversation(expense, 'expense'));
+bot.use(createConversation(transcation, 'transcation'));
+// bot.use(menu);
 
 // bot.use(i18n);
 
@@ -31,40 +43,39 @@ bot.command('start', async (ctx) => {
     const { data } = await axios.get(
       `${BOT_SERVER}/v1/users/telegram/${ctx.from.id}`,
     );
-    console.log(data);
     if (!data) {
       /**
        * Register New User
        */
-      const response = await axios.post(`${BOT_SERVER}/v1/users`, {
+      await axios.post(`${BOT_SERVER}/v1/users`, {
         telegramId: ctx.from.id,
         username: ctx.from.username,
       });
-      const newUser = response.data;
-      const { message, option } = await summaryReply(
-        newUser.username,
-        newUser._id,
-      );
-      await ctx.replyFmt(message, option);
-    } else {
-      const { message, option } = await summaryReply(data.username, data._id);
-      // console.log(message);
-      ctx.replyFmt(message, option);
     }
+
+    const { message, option } = await summaryReply(ctx);
+    // console.log(message);
+    ctx.replyFmt(message, option);
   }
 });
 
 // Expense Functionality
-bot.callbackQuery('add_expense', addExpense);
-// bot.on('callback_query:data', makeTranscation);
-// bot.on('message:text', (ctx) => {});
+bot.callbackQuery('add_expense', async (ctx) => {
+  await ctx.conversation.enter('expense');
+});
+// Setting
+bot.callbackQuery('setting', async (ctx) => {
+  await ctx.conversation.enter('expense');
+});
 
-// // Reply to any message with "Hi there!".
-// bot.on('message', async (ctx) => {
-//   ctx.reply('Hi there 2!');
-//   const response = await axios.get(`${BOT_SERVER}/v1/currencies`);
-//   console.log(response.data);
-// });
+bot.callbackQuery('transcations', async (ctx) => {
+  await ctx.conversation.enter('transcation');
+});
+
+bot.callbackQuery('home', async (ctx) => {
+  const { message, option } = await summaryReply(ctx);
+  ctx.replyFmt(message, option);
+});
 
 bot.catch((err) => {
   const { ctx } = err;

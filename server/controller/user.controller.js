@@ -76,26 +76,29 @@ const monthlySpendingById = asyncHandler(async (req, res) => {
     },
     { $unwind: '$currency' }, // Flatten currency array
 
-    // Add a field for converted amount
+    // // Add a field for converted amount
     {
       $addFields: {
         convertedAmount: {
           $multiply: [
             '$amount',
             {
-              $literal: {
-                USD: 1,
-                KHR: 0.00024,
-                EUR: 1.08,
-                GBP: 1.26,
-                JPY: 0.007,
-                AUD: 0.65,
-                CAD: 0.74,
-                CHF: 1.09,
-                CNY: 0.14,
-                INR: 0.012,
-                KRW: 0.00077,
-              }['$currency.symbol'],
+              $switch: {
+                branches: [
+                  { case: { $eq: ['$currency.symbol', 'USD'] }, then: 1 },
+                  { case: { $eq: ['$currency.symbol', 'KHR'] }, then: 0.00024 },
+                  { case: { $eq: ['$currency.symbol', 'EUR'] }, then: 1.08 },
+                  { case: { $eq: ['$currency.symbol', 'GBP'] }, then: 1.26 },
+                  { case: { $eq: ['$currency.symbol', 'JPY'] }, then: 0.007 },
+                  { case: { $eq: ['$currency.symbol', 'AUD'] }, then: 0.65 },
+                  { case: { $eq: ['$currency.symbol', 'CAD'] }, then: 0.74 },
+                  { case: { $eq: ['$currency.symbol', 'CHF'] }, then: 1.09 },
+                  { case: { $eq: ['$currency.symbol', 'CNY'] }, then: 0.14 },
+                  { case: { $eq: ['$currency.symbol', 'INR'] }, then: 0.012 },
+                  { case: { $eq: ['$currency.symbol', 'KRW'] }, then: 0.00077 },
+                ],
+                default: 0, // Default to 0 if no match is found
+              },
             },
           ],
         },
@@ -105,12 +108,14 @@ const monthlySpendingById = asyncHandler(async (req, res) => {
     // Group by category to calculate total spending per category
     {
       $group: {
-        _id: '$category.name', // Group by category name
+        _id: {
+          $concat: ['$category.sign', ' ', '$category.name'], // Combine sign and name
+        },
         totalAmountUSD: { $sum: '$convertedAmount' }, // Sum of spending per category in USD
       },
     },
 
-    // Calculate the total spending across all categories
+    // // Calculate the total spending across all categories
     {
       $group: {
         _id: null,
@@ -121,22 +126,35 @@ const monthlySpendingById = asyncHandler(async (req, res) => {
       },
     },
 
-    // Calculate percentages for each category
+    // // Calculate percentages for each category
     {
       $unwind: '$categories',
     },
     {
       $addFields: {
         'categories.percentage': {
-          $multiply: [
-            { $divide: ['$categories.totalAmountUSD', '$totalSpentUSD'] },
-            100,
+          $round: [
+            {
+              $cond: {
+                if: { $eq: ['$totalSpentUSD', 0] },
+                then: 0,
+                else: {
+                  $multiply: [
+                    {
+                      $divide: ['$categories.totalAmountUSD', '$totalSpentUSD'],
+                    },
+                    100,
+                  ],
+                },
+              },
+            },
+            2,
           ],
         },
       },
     },
 
-    // Reformat output to include totalSpent and category breakdown
+    // // Reformat output to include totalSpent and category breakdown
     {
       $group: {
         _id: null,
@@ -145,7 +163,7 @@ const monthlySpendingById = asyncHandler(async (req, res) => {
       },
     },
 
-    // Project the final structure
+    // // Project the final structure
     {
       $project: {
         _id: 0,
@@ -154,6 +172,8 @@ const monthlySpendingById = asyncHandler(async (req, res) => {
       },
     },
   ]);
+
+  // return res.json(summary);
 
   return res.json(summary[0] || { totalSpentUSD: 0, categoryBreakdown: [] });
 });

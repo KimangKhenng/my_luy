@@ -8,6 +8,6 @@ const {
 const ExpenseRouter = express.Router();
 
 ExpenseRouter.post('/', createExpense);
-ExpenseRouter.get('/:userId', getTranscationsByUserId);
+ExpenseRouter.get('/', getTranscationsByUserId);
 
 module.exports = ExpenseRouter;
