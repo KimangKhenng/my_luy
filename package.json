@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "init-bot": "node bot/init.js",
+    "init-currency": "node server/fixture.js",
     "serve": "node server/index.js",
     "dev": "nodemon -r dotenv/config -L",
     "bot": "nodemon -L bot/index.js"

@@ -94,6 +94,7 @@ async function expense(conversation, ctx) {
   } = await conversation.waitFor('message:text');
 
   let spending = await conversation.external(() => parseAmount(text));
+  console.log(spending);
   while (spending.err) {
     await ctx.replyFmt(
       fmt`${bold(

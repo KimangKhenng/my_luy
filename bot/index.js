@@ -6,7 +6,7 @@ const {
   conversations,
   createConversation,
 } = require('@grammyjs/conversations');
-const { hydrateReply } = require('@grammyjs/parse-mode');
+const { hydrateReply, parseMode } = require('@grammyjs/parse-mode');
 const { I18n } = require('@grammyjs/i18n');
 const { run } = require('@grammyjs/runner');
 const axios = require('axios');
@@ -25,6 +25,7 @@ const { BOT_SERVER } = process.env;
 // });
 const bot = new Bot(BOT_TOKEN);
 bot.use(hydrateReply);
+// bot.api.config.use(parseMode('MarkdownV2'));
 bot.use(session({ initial: () => ({}) }));
 // bot.use(i18n);
 bot.use(conversations());
@@ -65,7 +66,7 @@ bot.callbackQuery('add_expense', async (ctx) => {
 });
 // Setting
 bot.callbackQuery('setting', async (ctx) => {
-  await ctx.conversation.enter('expense');
+  await ctx.replyWithMarkdownV2('*This* is _withMarkdownV2_ `formatting`');
 });
 
 bot.callbackQuery('transcations', async (ctx) => {
