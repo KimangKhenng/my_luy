@@ -9,8 +9,8 @@ async function transcation(conversation, ctx) {
   const { data } = await conversation.external(() =>
     axios.get(`${BOT_SERVER}/v1/users/telegram/${ctx.from.id}`),
   );
-  console.log(data);
-  console.log(ctx.from);
+  // console.log(data);
+  // console.log(ctx.from);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);

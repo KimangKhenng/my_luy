@@ -88,6 +88,7 @@ async function expense(conversation, ctx) {
       fmt`For example ${bold('10 USD')}`,
       fmt`or ${bold('4000 KHR')}`,
     ),
+    { reply_markup: { force_reply: true } },
   );
   let {
     msg: { text },
@@ -100,6 +101,7 @@ async function expense(conversation, ctx) {
       fmt`${bold(
         'Invalid Input!',
       )}\n\n Make sure to input in these format:\n - 10 USD\n - 10 usd\n - 40000 KHR\n - 40000 khr`,
+      { reply_markup: { force_reply: true } },
     );
     let {
       msg: { text },
@@ -117,6 +119,7 @@ async function expense(conversation, ctx) {
       fmt`or ${bold('KuyTeav')}`,
       fmt`or ${bold('7Eleven')}`,
     ),
+    { reply_markup: { force_reply: true } },
   );
   const reply = await conversation.waitFor('message:text');
 

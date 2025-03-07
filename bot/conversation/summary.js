@@ -17,9 +17,9 @@ const summaryReply = async (ctx) => {
   const formattedCategories = categoryBreakdown
     .map(
       (item) =>
-        `${bold(item.category)}: ${item.totalAmountUSD.toFixed(
-          2,
-        )} USD (${bold(item.percentage)}%)`,
+        `${bold(item.category)}: ${item.totalAmountUSD.toFixed(2)} USD (${bold(
+          item.percentage,
+        )}%)`,
     )
     .join('\n');
 

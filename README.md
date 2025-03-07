@@ -73,5 +73,4 @@ docker compose up --build
 ## Additional Notes
 - Ensure that your .env file is correctly configured before starting the application.
 - You can manage and customize bot commands through the Telegram BotFather interface.
-- 
 Feel free to submit any issues or feature requests via the Issues section. 😊
