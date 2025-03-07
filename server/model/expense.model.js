@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
+import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const ExpenseSchema = new mongoose.Schema(
   {
@@ -33,4 +33,4 @@ ExpenseSchema.plugin(mongoosePaginate);
 
 const ExpenseModel = mongoose.model('Expense', ExpenseSchema);
 
-module.exports = ExpenseModel;
+export default ExpenseModel;

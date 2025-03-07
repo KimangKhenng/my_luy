@@ -1,6 +1,6 @@
-const { PaginationParameters } = require('mongoose-paginate-v2');
-const asyncHandler = require('express-async-handler');
-const WalletModel = require('../model/wallet.model');
+import { PaginationParameters } from 'mongoose-paginate-v2';
+import asyncHandler from 'express-async-handler';
+import WalletModel from '../model/wallet.model.js';
 
 const createWallet = asyncHandler(async (req, res) => {
   const { name, description, userId, balance, currencyId } = req.body;
@@ -22,4 +22,4 @@ const getWalletsByUserId = asyncHandler(async (req, res) => {
   return res.json(wallets);
 });
 
-module.exports = { createWallet, getWalletsByUserId };
+export { createWallet, getWalletsByUserId };

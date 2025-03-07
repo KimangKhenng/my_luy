@@ -1,10 +1,10 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
   getUsers,
   createUser,
   getUserbyTelegramId,
   monthlySpendingById,
-} = require('../../controller/user.controller');
+} from '../../controller/user.controller.js';
 
 const UserRouter = express.Router();
 
@@ -13,4 +13,4 @@ UserRouter.get('/', getUsers);
 UserRouter.get('/telegram/:telegramId', getUserbyTelegramId);
 UserRouter.get('/monthly-summary/:userId', monthlySpendingById);
 
-module.exports = UserRouter;
+export default UserRouter;

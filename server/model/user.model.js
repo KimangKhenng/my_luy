@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
+import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const UserSchema = new mongoose.Schema(
   {
@@ -17,4 +17,4 @@ UserSchema.plugin(mongoosePaginate);
 
 const UserModel = mongoose.model('User', UserSchema);
 
-module.exports = UserModel;
+export default UserModel;

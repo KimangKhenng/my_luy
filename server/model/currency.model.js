@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
+import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const CurrencySchema = new mongoose.Schema(
   {
@@ -14,4 +14,4 @@ CurrencySchema.plugin(mongoosePaginate);
 
 const CurrencyModel = mongoose.model('Currency', CurrencySchema);
 
-module.exports = CurrencyModel;
+export default CurrencyModel;

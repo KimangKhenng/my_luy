@@ -1,6 +1,6 @@
-require('dotenv').config();
-const dbConnect = require('./db/db');
-const CurrencyModel = require('./model/currency.model');
+import 'dotenv/config';
+import dbConnect from './db/db';
+import CurrencyModel from './model/currency.model';
 
 dbConnect().catch((err) => {
   console.log(err);

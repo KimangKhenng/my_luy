@@ -1,5 +1,5 @@
-const { InlineKeyboard } = require('grammy');
-const { Menu } = require('@grammyjs/menu');
+import { InlineKeyboard } from 'grammy';
+// import { Menu } from '@grammyjs/menu';
 const firstRow = [
   // ['Previous', 'next_month'],
   ['Add Expense 💰', 'add_expense'],
@@ -19,4 +19,4 @@ const settingRow = secondRow.map(([label, data]) =>
 
 const keyboard = InlineKeyboard.from([buttonRow, settingRow]);
 
-module.exports = { keyboard };
+export default keyboard;

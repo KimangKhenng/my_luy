@@ -1,21 +1,19 @@
 /* eslint-disable no-console */
-require('dotenv').config();
+import 'dotenv/config';
+import { Bot, GrammyError, HttpError, session } from 'grammy';
+import { conversations, createConversation } from '@grammyjs/conversations';
+import { hydrateReply, parseMode } from '@grammyjs/parse-mode';
+// import { I18n } from '@grammyjs/i18n';
+import { run } from '@grammyjs/runner';
+import axios from 'axios';
+import summaryReply from './conversation/summary.js';
+import expense from './conversation/expense.js';
+import transcation from './conversation/transcation.js';
 
-const { Bot, GrammyError, HttpError, session } = require('grammy');
-const {
-  conversations,
-  createConversation,
-} = require('@grammyjs/conversations');
-const { hydrateReply, parseMode } = require('@grammyjs/parse-mode');
-const { I18n } = require('@grammyjs/i18n');
-const { run } = require('@grammyjs/runner');
-const axios = require('axios');
-const { summaryReply } = require('./conversation/summary');
-const { expense } = require('./conversation/expense');
-const transcation = require('./conversation/transcation');
+// dotenv.config();
+const { BOT_TOKEN, BOT_SERVER } = process.env;
 
-const { BOT_TOKEN } = process.env;
-const { BOT_SERVER } = process.env;
+// console.log(BOT_TOKEN, BOT_SERVER);
 
 // const i18n = new I18n({
 //   defaultLocale: 'en',
@@ -23,6 +21,7 @@ const { BOT_SERVER } = process.env;
 //   directory: './bot/locales',
 //   fluentBundleOptions: { useIsolating: false },
 // });
+
 const bot = new Bot(BOT_TOKEN);
 bot.use(hydrateReply);
 // bot.api.config.use(parseMode('MarkdownV2'));

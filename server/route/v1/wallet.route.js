@@ -1,13 +1,12 @@
-const express = require('express');
-
-const {
+import express from 'express';
+import {
   createWallet,
   getWalletsByUserId,
-} = require('../../controller/wallet.controller');
+} from '../../controller/wallet.controller.js';
 
 const WalletRouter = express.Router();
 
 WalletRouter.post('/', createWallet);
 WalletRouter.get('/:userId', getWalletsByUserId);
 
-module.exports = WalletRouter;
+export default WalletRouter;

@@ -1,6 +1,6 @@
-const { PaginationParameters } = require('mongoose-paginate-v2');
-const asyncHandler = require('express-async-handler');
-const CategoryModel = require('../model/category.model');
+import { PaginationParameters } from 'mongoose-paginate-v2';
+import asyncHandler from 'express-async-handler';
+import CategoryModel from '../model/category.model.js';
 
 const createCategory = asyncHandler(async (req, res) => {
   const { name, description, userId } = req.body;
@@ -20,4 +20,4 @@ const getCategoriesByUserId = asyncHandler(async (req, res) => {
   return res.json(categories);
 });
 
-module.exports = { createCategory, getCategoriesByUserId };
+export { createCategory, getCategoriesByUserId };

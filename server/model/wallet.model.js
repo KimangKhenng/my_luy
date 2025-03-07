@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
+import { de } from '@faker-js/faker';
+import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const WalletSchema = new mongoose.Schema(
   {
@@ -24,4 +25,4 @@ WalletSchema.plugin(mongoosePaginate);
 
 const WalletModel = mongoose.model('Wallet', WalletSchema);
 
-module.exports = WalletModel;
+export default WalletModel;

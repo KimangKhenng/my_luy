@@ -1,16 +1,16 @@
-const { bold, fmt, italic, link } = require('@grammyjs/parse-mode');
-const axios = require('axios');
-const { InlineKeyboard } = require('grammy');
-const moment = require('moment');
-const qs = require('qs');
+import { bold, fmt, italic, link } from '@grammyjs/parse-mode';
+import axios from 'axios';
+import { InlineKeyboard } from 'grammy';
+import moment from 'moment';
+import qs from 'qs';
+import { markdownTable } from 'markdown-table';
+
 const { BOT_SERVER } = process.env;
 
-async function transcation(conversation, ctx) {
+const transcation = async (conversation, ctx) => {
   const { data } = await conversation.external(() =>
     axios.get(`${BOT_SERVER}/v1/users/telegram/${ctx.from.id}`),
   );
-  // console.log(data);
-  // console.log(ctx.from);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -39,67 +39,31 @@ async function transcation(conversation, ctx) {
     }),
   );
 
-  //   console.log(transcations.data.docs);
-
   const formattedTrans = transcations.data.docs
     .map(
-      (item) =>
-        `${transcations.data.docs.indexOf(item) + 1}   -   ${bold(
-          item.amount,
-        )} ${item.currencyId.sign} ${
+      (item, index) =>
+        `${index + 1} - ${bold(item.amount)} ${item.currencyId.sign} ${
           item.description ? `- ${italic(item.description)}` : ''
-        }   |   ${item.categoryId.sign} ${item.categoryId.name}`,
+        } | ${item.categoryId.sign} ${item.categoryId.name}`,
     )
     .join('\n');
 
-  //   console.log(formattedTrans);
+  const keyboard = new InlineKeyboard()
+    .text('Home', 'home')
+    .row()
+    .text('Previous', 'previous')
+    .text('Add Expense 💰', 'add_expense')
+    .text('Next', 'next')
+    .row()
+    .text('Delete', 'delete_expense')
+    .text('Edit', 'edit_expense');
 
-  const firstRow = [
-    // ['Previous', 'next_month'],
-    ['Home', 'home'],
-    // ['Next', 'previous_month'],
-  ];
-
-  const secondRow = [
-    // ['Previous', 'next_month'],
-    ['Previous', 'previous'],
-    ['Add Expense 💰', 'add_expense'],
-    ['Next', 'next'],
-    // ['Next', 'previous_month'],
-  ];
-
-  const thirdRow = [
-    // ['Previous', 'next_month'],
-    ['Delete', 'delete_expense'],
-    ['Edit', 'edit_expense'],
-    // ['Next', 'previous_month'],
-  ];
-  const firstButtons = firstRow.map(([label, data]) =>
-    InlineKeyboard.text(label, data),
-  );
-
-  const secondButtons = secondRow.map(([label, data]) =>
-    InlineKeyboard.text(label, data),
-  );
-
-  const thridButtons = thirdRow.map(([label, data]) =>
-    InlineKeyboard.text(label, data),
-  );
-
-  const keyboard = InlineKeyboard.from([
-    firstButtons,
-    secondButtons,
-    thridButtons,
-  ]);
   await ctx.replyFmt(
     fmt(
       ['', '', '', '', ''],
       fmt`${bold('Transcations:')}`,
       fmt`\n\n${italic(`${moment().format('DD MMMM YYYY')}`)}`,
       fmt`\n\n${formattedTrans}`,
-      //   fmt`\n\npage ${bold(transcations.data.page)} of ${bold(
-      //     transcations.data.totalPages,
-      //   )}`,
       fmt`\n\n${italic(
         `My Luy - by TFD, built with privacy in mind. More information: ${link(
           'tfdevs.com/projects/myluy',
@@ -111,5 +75,6 @@ async function transcation(conversation, ctx) {
       reply_markup: keyboard,
     },
   );
-}
-module.exports = transcation;
+};
+
+export default transcation;

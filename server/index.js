@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
-const express = require('express');
-require('dotenv').config();
+import express from 'express';
+import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
+import v1Router from './route/v1/index.js';
+import dbConnect from './db/db.js';
+import setupSwagger from './swagger/index.js';
+
+dotenv.config();
 
 const PORT = process.env.APP_PORT;
-
-const bodyParser = require('body-parser');
-
-const v1Router = require('./route/v1');
-const dbConnect = require('./db/db');
-const setupSwagger = require('./swagger');
 
 dbConnect().catch((err) => {
   console.log(err);

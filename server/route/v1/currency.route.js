@@ -1,13 +1,12 @@
-const express = require('express');
-
-const {
+import express from 'express';
+import {
   createCurrency,
   getCurrencies,
-} = require('../../controller/currency.controller');
+} from '../../controller/currency.controller.js';
 
 const CurrencyRouter = express.Router();
 
 CurrencyRouter.post('/', createCurrency);
 CurrencyRouter.get('/', getCurrencies);
 
-module.exports = CurrencyRouter;
+export default CurrencyRouter;

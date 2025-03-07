@@ -1,4 +1,4 @@
-const swagger = require('swagger-generator-express');
+import swagger from 'swagger-generator-express';
 
 // Define your router here
 
@@ -44,4 +44,4 @@ function setupSwagger(app) {
   });
 }
 
-module.exports = setupSwagger;
+export default setupSwagger;

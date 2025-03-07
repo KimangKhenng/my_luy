@@ -1,4 +1,2 @@
-async function setting(conversation, ctx) {
-    
-}
-module.exports = setting;
+async function setting(conversation, ctx) {}
+export default setting;

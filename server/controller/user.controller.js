@@ -1,9 +1,9 @@
-const { PaginationParameters } = require('mongoose-paginate-v2');
-const asyncHandler = require('express-async-handler');
-const UserModel = require('../model/user.model');
-const CategoryModel = require('../model/category.model');
-const ExpenseModel = require('../model/expense.model');
-const mongoose = require('mongoose');
+import { PaginationParameters } from 'mongoose-paginate-v2';
+import asyncHandler from 'express-async-handler';
+import mongoose from 'mongoose';
+import UserModel from '../model/user.model.js';
+import CategoryModel from '../model/category.model.js';
+import ExpenseModel from '../model/expense.model.js';
 
 const createUser = asyncHandler(async (req, res) => {
   const { telegramId, username } = req.body;
@@ -178,9 +178,4 @@ const monthlySpendingById = asyncHandler(async (req, res) => {
   return res.json(summary[0] || { totalSpentUSD: 0, categoryBreakdown: [] });
 });
 
-module.exports = {
-  createUser,
-  getUsers,
-  getUserbyTelegramId,
-  monthlySpendingById,
-};
+export { createUser, getUsers, getUserbyTelegramId, monthlySpendingById };

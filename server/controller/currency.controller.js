@@ -1,6 +1,6 @@
-const asyncHandler = require('express-async-handler');
-const CurrencyModel = require('../model/currency.model');
-const { PaginationParameters } = require('mongoose-paginate-v2');
+import asyncHandler from 'express-async-handler';
+import { PaginationParameters } from 'mongoose-paginate-v2';
+import CurrencyModel from '../model/currency.model.js';
 
 const createCurrency = asyncHandler(async (req, res) => {
   const { name, symbol } = req.body;
@@ -18,4 +18,4 @@ const getCurrencies = asyncHandler(async (req, res) => {
   return res.json(currencies);
 });
 
-module.exports = { createCurrency, getCurrencies };
+export { createCurrency, getCurrencies };

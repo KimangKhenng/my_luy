@@ -1,12 +1,12 @@
-const { PaginationParameters } = require('mongoose-paginate-v2');
-const asyncHandler = require('express-async-handler');
-const ExpenseModel = require('../model/expense.model');
+import { PaginationParameters } from 'mongoose-paginate-v2';
+import asyncHandler from 'express-async-handler';
+import ExpenseModel from '../model/expense.model.js';
 
-function mergeArrayToObject(array) {
-  return array.reduce((result, current) => {
-    return { ...result, ...current };
-  }, {});
-}
+// function mergeArrayToObject(array) {
+//   return array.reduce((result, current) => {
+//     return { ...result, ...current };
+//   }, {});
+// }
 
 const createExpense = asyncHandler(async (req, res) => {
   const { userId, categoryId, currencyId, amount, description } = req.body;
@@ -26,7 +26,7 @@ const createExpense = asyncHandler(async (req, res) => {
 const getTranscationsByUserId = asyncHandler(async (req, res) => {
   // const id = req.params.userId;
   const options = new PaginationParameters(req).get();
-  console.log(...options);
+  // console.log(...options);
   // options[0] = ;
   // console.log(options);
   // console.log({ userId: id }, ...options);
@@ -34,4 +34,4 @@ const getTranscationsByUserId = asyncHandler(async (req, res) => {
   return res.json(expenses);
 });
 
-module.exports = { createExpense, getTranscationsByUserId };
+export { createExpense, getTranscationsByUserId };

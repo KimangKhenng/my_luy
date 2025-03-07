@@ -1,13 +1,12 @@
-const express = require('express');
-
-const {
+import express from 'express';
+import {
   createExpense,
   getTranscationsByUserId,
-} = require('../../controller/expense.controller');
+} from '../../controller/expense.controller.js';
 
 const ExpenseRouter = express.Router();
 
 ExpenseRouter.post('/', createExpense);
 ExpenseRouter.get('/', getTranscationsByUserId);
 
-module.exports = ExpenseRouter;
+export default ExpenseRouter;

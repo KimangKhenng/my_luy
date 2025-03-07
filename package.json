@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "init-bot": "node bot/init.js",
@@ -28,6 +29,7 @@
     "express-async-handler": "^1.2.0",
     "express-useragent": "^1.0.15",
     "grammy": "^1.33.0",
+    "markdown-table": "^3.0.4",
     "moment": "^2.30.1",
     "mongoose": "^8.9.1",
     "mongoose-paginate-v2": "^1.8.5",
@@ -44,5 +46,6 @@
     "globals": "^15.12.0",
     "nodemon": "^3.1.9",
     "prettier": "^2.2.1"
-  }
+  },
+  "packageManager": "pnpm@9.1.4+sha1.2432063d815cfa88fd9fef1d85a445e3f609851d"
 }

@@ -1,13 +1,12 @@
-const express = require('express');
-
-const {
+import express from 'express';
+import {
   createCategory,
   getCategoriesByUserId,
-} = require('../../controller/category.controller');
+} from '../../controller/category.controller.js';
 
 const CategoryRouter = express.Router();
 
 CategoryRouter.post('/', createCategory);
 CategoryRouter.get('/:userId', getCategoriesByUserId);
 
-module.exports = CategoryRouter;
+export default CategoryRouter;

@@ -1,10 +1,12 @@
-const { bold, fmt, italic, link } = require('@grammyjs/parse-mode');
-const axios = require('axios');
-const moment = require('moment');
-const { keyboard } = require('../keyboard/menu');
+import { bold, fmt, italic, link } from '@grammyjs/parse-mode';
+import axios from 'axios';
+import moment from 'moment';
+import keyboard from '../keyboard/menu.js';
+
 const { BOT_SERVER } = process.env;
 
 const summaryReply = async (ctx) => {
+  // console.log('summaryReply');
   const user = await axios.get(
     `${BOT_SERVER}/v1/users/telegram/${ctx.from.id}`,
   );
@@ -44,4 +46,4 @@ const summaryReply = async (ctx) => {
   };
 };
 
-module.exports = { summaryReply };
+export default summaryReply;

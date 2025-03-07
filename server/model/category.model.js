@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
+import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const CategorySchema = new mongoose.Schema(
   {
@@ -21,4 +21,4 @@ CategorySchema.plugin(mongoosePaginate);
 
 const CategoryModel = mongoose.model('Category', CategorySchema);
 
-module.exports = CategoryModel;
+export default CategoryModel;
